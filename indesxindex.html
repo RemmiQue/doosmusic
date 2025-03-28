@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOOS MUSIC | Premium Music Distribution</title>
+    <style>
+        :root {
+            --primary: #00f2fe;
+            --secondary: #4facfe;
+            --dark: #0a0a1a;
+            --text-light: rgba(240, 248, 255, 0.9);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--dark);
+            color: white;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Animated Logo */
+        .logo-container {
+            text-align: center;
+            padding: 2rem 0;
+            position: relative;
+        }
+
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: conic-gradient(from 180deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            margin: 0 auto 0.5rem;
+            position: relative;
+            animation: rotate 8s linear infinite, pulse 2s ease-in-out infinite alternate;
+        }
+
+        .logo-icon::before {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: var(--dark);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            from { box-shadow: 0 0 10px rgba(0, 242, 254, 0.2); }
+            to { box-shadow: 0 0 20px rgba(0, 242, 254, 0.4); }
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+        }
+
+        /* Navigation */
+        .nav-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            cursor: pointer;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            padding: 0.5rem 0.7rem;
+            color: var(--text-light);
+            border: none;
+            font-size: 1.2rem;
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 5rem;
+            right: -100%;
+            background: rgba(10, 10, 26, 0.98);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border: 1px solid rgba(0, 242, 254, 0.1);
+        }
+
+        .nav-menu.active {
+            right: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            display: block;
+            padding: 0.7rem 1rem;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+            transform: translateX(-5px);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 2rem 0 4rem;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            margin-bottom: 2rem;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 2rem;
+            font-weight: 700;
+            margin: 1.5rem 0;
+            transition: var(--transition);
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 242, 254, 0.3);
+        }
+
+        /* Platform Logos */
+        .platforms {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            margin: 3rem 0;
+        }
+
+        .platform {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .platform-logo {
+            height: 50px;
+            width: auto;
+            filter: brightness(0) invert(1);
+            opacity: 0.9;
+            transition: var(--transition);
+        }
+
+        .platform-logo:hover {
+            opacity: 1;
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        .platform-name {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* Content Sections */
+        .section {
+            padding: 4rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            text-align: center;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(0, 242, 254, 0.2);
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 0 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section a {
+            color: var(--text-light);
+            text-decoration: none;
+            display: block;
+            margin: 1rem 0;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            text-align: center;
+            color: var(--text-light);
+            opacity: 0.7;
+            font-size: 0.9rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .platforms {
+                gap: 1.5rem;
+            }
+            
+            .platform-logo {
+                height: 40px;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon"></div>
+            <div class="logo-text">DOOS MUSIC</div>
+        </div>
+    </header>
+
+    <button class="nav-toggle" onclick="toggleMenu()">•••</button>
+    
+    <nav class="nav-menu" id="navMenu">
+        <a href="#features">Features</a>
+        <a href="#distribution">Distribution</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Professional Music Distribution</h1>
+            <p>Get your music on Spotify, Apple Music, TikTok, YouTube and 150+ other platforms worldwide. Keep 100% of your rights and royalties.</p>
+            
+            <a href="https://wa.me/2348120047779?text=Hi%20DOOS%20MUSIC%20team,%20I%20want%20to%20distribute%20my%20music" 
+               class="cta-button">
+               START DISTRIBUTING NOW
+            </a>
+
+            <div class="platforms">
+                <div class="platform">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" 
+                         alt="Spotify" class="platform-logo">
+                    <span class="platform-name">Spotify</span>
+                </div>
+                <div class="platform">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" 
+                         alt="Apple Music" class="platform-logo">
+                    <span class="platform-name">Apple Music</span>
+                </div>
+                <div class="platform">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/TikTok_logo.svg" 
+                         alt="TikTok" class="platform-logo">
+                    <span class="platform-name">TikTok</span>
+                </div>
+                <div class="platform">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" 
+                         alt="YouTube" class="platform-logo">
+                    <span class="platform-name">YouTube</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="features">
+            <h2>Why Choose DOOS MUSIC?</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Global Reach</h3>
+                    <p>Distribute your music to all major streaming platforms and digital stores worldwide with just one upload.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Keep 100% Royalties</h3>
+                    <p>No hidden fees or rights grabs. You maintain complete ownership of your music and earnings.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Fast Delivery</h3>
+                    <p>Your music goes live on platforms in as little as 48 hours after approval.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Detailed Analytics</h3>
+                    <p>Track your streams, downloads, and revenue with our comprehensive dashboard.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>YouTube Monetization</h3>
+                    <p>Earn money when your music is used in YouTube videos through Content ID.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>24/7 Support</h3>
+                    <p>Our team is always available to help with any questions about your releases.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="how-it-works">
+            <h2>How It Works</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>1. Upload Your Music</h3>
+                    <p>Submit your tracks, artwork, and metadata through our simple upload process.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>2. We Distribute</h3>
+                    <p>We deliver your music to all major platforms and stores worldwide.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>3. Go Live</h3>
+                    <p>Your music appears on platforms within days of approval.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>4. Earn Royalties</h3>
+                    <p>Collect payments from all platforms while keeping 100% of your rights.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Services</h3>
+                <a href="#features">Music Distribution</a>
+                <a href="#how-it-works">Release Strategy</a>
+                <a href="#features">YouTube Monetization</a>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#features">Platform Coverage</a>
+                <a href="#features">Release Checklist</a>
+            </div>
+            <div class="footer-section">
+                <h3>Company</h3>
+                <a href="#contact">Contact Us</a>
+                <a href="https://wa.me/2348120047779">WhatsApp Support</a>
+                <a href="#contact">Help Center</a>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2023 DOOS MUSIC. All rights reserved.<br>
+            Professional music distribution for independent artists
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (event) => {
+            const navMenu = document.getElementById('navMenu');
+            const navToggle = document.querySelector('.nav-toggle');
+            
+            if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                        navMenu.classList.remove('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
